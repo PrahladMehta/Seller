@@ -3,6 +3,8 @@
 import { reactive} from 'vue';
 import { useRouter } from 'vue-router';
 
+import { resetpasswordRoute } from './Utils';
+
 
 export default {
   setup(){
@@ -25,7 +27,7 @@ export default {
             return;
       }
       try{
-        const response=await fetch("http://localhost:4000/api/v1/resetpassword",{
+        const response=await fetch(resetpasswordRoute,{
         method:"POST",
         body:JSON.stringify(user),
         headers: {

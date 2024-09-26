@@ -6,6 +6,8 @@ import {inject} from 'vue';
 import { useRouter } from 'vue-router';
 import { reactive } from 'vue';
 
+import { loginRoute } from './Utils';
+
 export default {
   setup(){
   const router=useRouter();
@@ -40,7 +42,7 @@ export default {
 
 
 
-        const response=await fetch(`http://localhost:4000/api/v1/otp`,{
+        const response=await fetch(loginRoute,{
         method:"POST",
         body:JSON.stringify(user),
         headers: {
@@ -53,7 +55,7 @@ export default {
       console.log(data);
       if(data.success){
             alert("You sign in");
-            localStorage.setItem("shoptoken",JSON.stringify(data.token));
+          
             router.push('/');
             return;
       }

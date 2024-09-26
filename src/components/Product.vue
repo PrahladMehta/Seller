@@ -120,6 +120,8 @@ import { ref } from 'vue';
 
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+
+import { updateProductRoute,getAllProductRoute,removeProductRoute,addProductRoute } from './Utils';
 const router=useRouter();
 const products = ref([
   // { id: 1, title: 'Product 1', price: 19.99, quantity: 100, image: 'https://via.placeholder.com/150', category: 'Electronic', description: 'A sample product description' },
@@ -185,7 +187,7 @@ const updateProduct =async () => {
   }
 
 
-   const response=await fetch("http://localhost:4000/api/v1/updateproduct",{
+   const response=await fetch(updateProductRoute,{
     method:'POST',
     body:formData,
     headers:{
@@ -213,7 +215,7 @@ const getAllProduct=async()=>{
       return;
     }
       
-    const response=await fetch("http://localhost:4000/api/v1/getallproduct",{
+    const response=await fetch(getAllProductRoute,{
       method:'GET',
       headers:{
         "Authorization":localStorage.getItem('shoptoken'),
@@ -244,7 +246,7 @@ const addProduct = async () => {
 
   formData.append('token', localStorage.getItem('shoptoken'));
 
-  const response = await fetch("http://localhost:4000/api/v1/addproduct", {
+  const response = await fetch(addProductRoute, {
     method: 'POST',
     body: formData,
     headers: {
@@ -275,7 +277,7 @@ const deleteProduct = async (id) => {
 
      const send={productId:id};
 
-    const response=await fetch("http://localhost:4000/api/v1/removeproduct",{
+    const response=await fetch(removeProductRoute,{
       method:"POST",
       body:JSON.stringify(send),
       headers:{

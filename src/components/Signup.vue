@@ -45,6 +45,8 @@ import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { inject } from 'vue';
 
+import { signUpRoute } from './Utils';
+
 export default {
   setup(props) {
     const router = useRouter();
@@ -88,7 +90,7 @@ export default {
       }
 
       try {
-        const response = await fetch("http://localhost:4000/api/v1/signup", {
+        const response = await fetch(signUpRoute, {
           method: "POST",
           body: JSON.stringify(user),
           headers: {
@@ -99,7 +101,9 @@ export default {
         const data = await response.json();
 
         if (data.success) {
+      
           router.push('/otp');
+          localStorage.setItem('shoptoken',JSON.stringify(data.token));
           return;
         }
 

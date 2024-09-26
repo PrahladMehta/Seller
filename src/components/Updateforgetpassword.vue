@@ -3,7 +3,7 @@
 import { reactive} from 'vue';
 import { useRouter } from 'vue-router';
 import { useRoute } from 'vue-router';
-
+import { updateforgetpasswordRoute } from './Utils';
 
 export default {
   setup(){
@@ -38,7 +38,7 @@ export default {
 
      
         const token=route.params.token;
-        const response=await fetch(`http://localhost:4000/api/v1/changeforgetpassword/${token}`,{
+        const response=await fetch(updateforgetpasswordRoute+'/'+token,{
         method:"POST",
         body:JSON.stringify(user),
         headers: {
